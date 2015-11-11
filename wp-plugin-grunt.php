@@ -50,7 +50,7 @@ add_action( 'wp_ajax_my_action', 'my_action_callback' );
 function my_action_callback() {
     global $wpdb; // this is how you get access to the database
     $environment = $_POST['environment'];
-    $response = shell_exec( $_POST['command']);
+    $response = shell_exec(escapeshellcmd($_POST['command']));
     echo $environment .' '. $response .' '. get_option( 'extra_post_info' );
     wp_die(); // this is required to terminate immediately and return a proper response
 }
